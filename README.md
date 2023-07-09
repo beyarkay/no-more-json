@@ -17,14 +17,14 @@ curl https://httpbin.org/ip
 After 🥳:
 
 ```
-curl 'https://jq-ify.shuttleapp.rs/api?url=https://httpbin.org/ip&q=.origin'
+curl 'https://no-more-json.shuttleapp.rs/api?url=https://httpbin.org/ip&q=.origin'
 "13.41.13.143"
 ```
 
 Let's break that down:
 
 ```
-https://jq-ify.shuttleapp.rs/api  <-- This is the API for no-more-json
+https://no-more-json.shuttleapp.rs/api  <-- This is the API for no-more-json
   ?url=https://httpbin.org/ip     <-- This is where you specify the url for your endpoint
   &q=.origin                      <-- This is where you put your jq query to parse the JSON
 ```
