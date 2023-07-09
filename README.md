@@ -25,8 +25,8 @@ Let's break that down:
 
 ```
 https://jq-ify.shuttleapp.rs/api  <-- This is the API for no-more-json
-  ?url=https://httpbin.org/ip    <-- This is where you specify the url for your endpoint
-  &q=.origin                     <-- This is where you put your jq query to parse the JSON
+  ?url=https://httpbin.org/ip     <-- This is where you specify the url for your endpoint
+  &q=.origin                      <-- This is where you put your jq query to parse the JSON
 ```
 If you don't know about `jq`, check this out: https://jqlang.github.io/jq/
 
