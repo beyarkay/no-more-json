@@ -23,9 +23,11 @@ curl 'https://jq-ify.shuttleapp.rs/api?url=https://httpbin.org/ip&q=.origin'
 
 Let's break that down:
 
-`  https://jq-ify.shuttleapp.rs/api  <-- This is the API for no-more-json
-     ?url=https://httpbin.org/ip    <-- This is where you specify the url for your endpoint
-     &q=.origin                     <-- This is where you put your jq query to parse the JSON`
+```
+https://jq-ify.shuttleapp.rs/api  <-- This is the API for no-more-json
+  ?url=https://httpbin.org/ip    <-- This is where you specify the url for your endpoint
+  &q=.origin                     <-- This is where you put your jq query to parse the JSON
+```
 If you don't know about `jq`, check this out: https://jqlang.github.io/jq/
 
 So this lets you parse arbitrary JSON blobs and just get back a simple scalar value, without
@@ -34,31 +36,29 @@ having to parse the JSON yourself, include a json-parsing library, or trying to 
 
 Here's a more complicated example:
 
-<table align="center">
-  <tr>
-    <th align="center">
-       Before
-    </th>
-    <th align="center">
-        After
-    </th>
-  </tr>
-  <tr>
-    <td align="center">
+Before (using data from wttr.in):
 
 ```
-code
+curl 'wttr.in/Detroit?format=j1'
+{
+    "current_condition": [
+        {
+            "FeelsLikeC": "27",     <-- The thing we want
+            ...29 lines...
+        }
+    ],
+    "nearest_area": [...],          <-- 25 lines ):
+    "request": [...],               <-- 4 lines
+    "weather": [...]                <-- 1248 lines!
+}
+```
+The jq query we'd want to run in order to extract the feels-like temperature is `.current_condition[0].FeelsLikeC`
+
+We can use `no-more-json` to execute the jq query for us, so we just get back a nice scalar value:
+
+```
+curl 'https://no-more-json.shuttleapp.rs/api?url=https://wttr.in/Detroit?format=j1&q=.current_condition%5B0%5D.FeelsLikeC'
+"27"
 ```
 
-    </td>
-    <td align="center">
-
-```
-code
-
-```
-
-    </td>
-
-  </tr>
-</table>
+The URL has been encoded so that the special characters in the jq query (like `[`, `]`) aren't treated specially.
