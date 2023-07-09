@@ -44,21 +44,25 @@ curl 'wttr.in/Detroit?format=j1'
     "current_condition": [
         {
             "FeelsLikeC": "27",     <-- The thing we want
-            ...29 lines...
+            29 other lines we don't want ):
         }
     ],
-    "nearest_area": [...],          <-- 25 lines ):
-    "request": [...],               <-- 4 lines
-    "weather": [...]                <-- 1248 lines!
+    "nearest_area": [...],          <-- 25 lines we don't want ):
+    "request": [...],               <-- 4 lines we don't want 
+    "weather": [...]                <-- 1248 lines we don't want!
 }
 ```
-The jq query we'd want to run in order to extract the feels-like temperature is `.current_condition[0].FeelsLikeC`
+The jq query we'd use to extract the feels-like temperature in Celcius is `.current_condition[0].FeelsLikeC`
 
-We can use `no-more-json` to execute the jq query for us, so we just get back a nice scalar value:
+We can use `no-more-json` to make a request to the wttr.in endpoint, extract
+the result, and then run the jq query for us on that result, so we just get
+back a nice scalar value:
 
 ```
 curl 'https://no-more-json.shuttleapp.rs/api?url=https://wttr.in/Detroit?format=j1&q=.current_condition%5B0%5D.FeelsLikeC'
 "27"
 ```
 
-The URL has been encoded so that the special characters in the jq query (like `[`, `]`) aren't treated specially.
+(The URL has been encoded so that the special characters in the jq query (like `[`, `]`) aren't treated specially.)
+
+Isn't that cool!
