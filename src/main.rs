@@ -5,7 +5,7 @@ use shuttle_runtime::tracing::info;
 extern crate rocket;
 
 #[get("/api?<q>&<url>")]
-fn jqapi(url: Option<String>, q: String) -> Result<String, String> {
+fn jqapi(q: String, url: String) -> Result<String, String> {
     info!("Got request /api?q={q}&url={url}");
     let json = reqwest::blocking::get(url)
         .map_err(|e| e.to_string())?
