@@ -5,14 +5,17 @@ use shuttle_runtime::tracing::info;
 extern crate rocket;
 
 #[get("/api/<url..>?<q>")]
-fn jqapi(url: String, q: String) -> Result<String, String> {
+fn jqapi(url: Option<String>, q: String) -> Result<String, String> {
     info!("Got request /api/{url}?q={q}");
-    // "https://httpbin.org/ip"
-    let json = reqwest::blocking::get(url)
-        .map_err(|e| e.to_string())?
-        .text()
-        .map_err(|e| e.to_string())?;
-    do_jq(json, q)
+    if let Some(url) = url {
+        let json = reqwest::blocking::get(url)
+            .map_err(|e| e.to_string())?
+            .text()
+            .map_err(|e| e.to_string())?;
+        do_jq(json, q)
+    } else {
+        Err("URL is required".to_string())
+    }
 }
 
 #[get("/<json>?<q>")]
