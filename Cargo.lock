@@ -900,18 +900,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "62b02a5381cc465bd3041d84623d0fa3b66738b52b8e2fc3bab8ad63ab032f4a"
 
 [[package]]
-name = "jq-ify"
-version = "0.1.0"
-dependencies = [
- "jq-rs",
- "reqwest",
- "rocket",
- "shuttle-rocket",
- "shuttle-runtime",
- "tokio",
-]
-
-[[package]]
 name = "jq-rs"
 version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1106,6 +1094,18 @@ dependencies = [
  "security-framework",
  "security-framework-sys",
  "tempfile",
+]
+
+[[package]]
+name = "no-more-json"
+version = "0.1.0"
+dependencies = [
+ "jq-rs",
+ "reqwest",
+ "rocket",
+ "shuttle-rocket",
+ "shuttle-runtime",
+ "tokio",
 ]
 
 [[package]]

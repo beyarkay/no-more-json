@@ -1,5 +1,5 @@
 [package]
-name = "jq-ify"
+name = "no-more-json"
 version = "0.1.0"
 edition = "2021"
 publish = false
