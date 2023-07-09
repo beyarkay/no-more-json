@@ -6,7 +6,7 @@ extern crate rocket;
 
 #[get("/api/<url..>?<q>")]
 fn jqapi(url: Option<String>, q: String) -> Result<String, String> {
-    info!("Got request /api/{url}?q={q}");
+    info!("Got request /api/{url:?}?q={q}");
     if let Some(url) = url {
         let json = reqwest::blocking::get(url)
             .map_err(|e| e.to_string())?
