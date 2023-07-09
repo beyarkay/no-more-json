@@ -21,6 +21,11 @@ fn jq(json: String, q: String) -> Result<String, String> {
     do_jq(json, q)
 }
 
+#[get("/")]
+fn index() -> &'static str {
+    "Check out https://github.com/beyarkay/no-more-json for details."
+}
+
 fn do_jq(json: String, q: String) -> Result<String, String> {
     info!("Running jq on {json} with {q}");
     jq_rs::run(&q, &json).map_err(|e| e.to_string())
@@ -28,7 +33,7 @@ fn do_jq(json: String, q: String) -> Result<String, String> {
 
 #[shuttle_runtime::main]
 async fn rocket() -> shuttle_rocket::ShuttleRocket {
-    let rocket = rocket::build().mount("/", routes![jq, jqapi]);
+    let rocket = rocket::build().mount("/", routes![jq, jqapi, index]);
 
     Ok(rocket.into())
 }
