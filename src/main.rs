@@ -4,18 +4,14 @@ use shuttle_runtime::tracing::info;
 #[macro_use]
 extern crate rocket;
 
-#[get("/api/<url..>?<q>")]
+#[get("/api?<q>&<url>")]
 fn jqapi(url: Option<String>, q: String) -> Result<String, String> {
-    info!("Got request /api/{url:?}?q={q}");
-    if let Some(url) = url {
-        let json = reqwest::blocking::get(url)
-            .map_err(|e| e.to_string())?
-            .text()
-            .map_err(|e| e.to_string())?;
-        do_jq(json, q)
-    } else {
-        Err("URL is required".to_string())
-    }
+    info!("Got request /api?q={q}&url={url}");
+    let json = reqwest::blocking::get(url)
+        .map_err(|e| e.to_string())?
+        .text()
+        .map_err(|e| e.to_string())?;
+    do_jq(json, q)
 }
 
 #[get("/<json>?<q>")]
