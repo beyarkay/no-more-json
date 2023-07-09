@@ -12,3 +12,4 @@ rocket = "0.5.0-rc.3"
 shuttle-rocket = "0.20.0"
 tokio = "1.29.1"
 jq-rs = { version = "0.4.1", features = ["bundled"] }
+reqwest = { version = "0.11.18", features = ["blocking", "json"] }
