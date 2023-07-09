@@ -4,7 +4,7 @@ use shuttle_runtime::tracing::info;
 #[macro_use]
 extern crate rocket;
 
-#[get("/api/<url>?<q>")]
+#[get("/api/<url..>?<q>")]
 fn jqapi(url: String, q: String) -> Result<String, String> {
     info!("Got request /api/{url}?q={q}");
     // "https://httpbin.org/ip"
