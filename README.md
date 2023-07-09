@@ -1,3 +1,5 @@
+##### Very much a work-in-progess. The idea will remain, but the endpoint will likely change (for the better).
+
 # `no-more-json`
 
 Fed up with JSON APIs? Just want one little value from a massive JSON object? Don't want to
